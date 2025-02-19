@@ -21,3 +21,7 @@ html, body {
 body {
   font-family: "Nanum Pen Script";
 }
+
+button,select {
+  font-family: "Nanum Pen Script";;
+}
