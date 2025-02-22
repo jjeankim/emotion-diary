@@ -1,9 +1,9 @@
-import { useParams } from "react-router-dom";
+import Editor from "../components/Editor";
 
 const Edit = () => {
-  const params = useParams()
+ 
 
-  return <div>{params.id}번 수정 페이지입니다</div>
+  return <Editor />
 }
 
 export default Edit;
