@@ -1,4 +1,5 @@
-import { getEmotionImage } from "../util/get-emotion-image";
+
+import { getEmotionImage } from "../util/getEmotionImage";
 import "./EmotionItem.css";
 
 const EmotionItem = ({ emotionId, emotionName, isSelected, onClick }) => {
