@@ -6,7 +6,26 @@ import Notfound from "./pages/Notfound";
 import Edit from "./pages/Edit";
 import { createContext, useReducer, useRef } from "react";
 
-function reducer(state, action) {
+export type DiaryData = {
+  id: number;
+  createdDate: Date;
+  emotionId: number;
+  content: string;
+}
+
+type DiariDispatchContext = {
+  onCreate: (createdDate:Date, emotionId:number, content:string) => void;
+  onUpdate: (id:number, createdDate:Date, emotionId:number, content:string) => void;
+  onDelete: (id:number) => void;
+}
+
+type DiaryAction = 
+  | {type: "CREATE"; data: DiaryData}
+  | {type: "UPDATE"; data: DiaryData}
+  | {type: "DELETE"; id : number}
+  
+
+function reducer(state:DiaryData[], action:DiaryAction) : DiaryData[]{
   switch (action.type) {
     case "CREATE":
       return [action.data, ...state];
@@ -21,10 +40,10 @@ function reducer(state, action) {
   }
 }
 
-export const DiaryStateContext = createContext();
-export const DiaryDispatchContext = createContext();
+export const DiaryStateContext = createContext<DiaryData[] | undefined>(undefined);
+export const DiaryDispatchContext = createContext<DiariDispatchContext | undefined>(undefined);
 
-const mockDate = [
+const mockData = [
   {
     id: 1,
     createdDate: new Date("2025-02-19").getTime(),
@@ -46,10 +65,10 @@ const mockDate = [
 ];
 
 function App() {
-  const [data, dispatch] = useReducer(reducer, mockDate);
+  const [data, dispatch] = useReducer(reducer, []);
   const idRef = useRef(3);
 
-  const onCreate = (createdDate, emotionId, content) => {
+  const onCreate = (createdDate:Date, emotionId:number, content:string) => {
     dispatch({
       type: "CREATE",
       data: {
@@ -61,7 +80,7 @@ function App() {
     });
   };
 
-  const onUpdate = (id, createdDate, emotionId, content) => {
+  const onUpdate = (id:number, createdDate:Date, emotionId:number, content:string) => {
     dispatch({
       type: "UPDATE",
       data: {
@@ -73,7 +92,7 @@ function App() {
     });
   };
 
-  const onDelete = (id) => {
+  const onDelete = (id:number) => {
     dispatch({
       type: "DELETE",
       id,

@@ -4,7 +4,14 @@ import Button from "./Button";
 import "./DiaryItem.css";
 import { getEmotionImage } from "../util/getEmotionImage";
 
-const DiaryItem = ({id, emotionId, content, createdDate}) => {
+interface DiaryItemProps {
+  id: number;
+  emotionId: number;
+  content: string;
+  createdDate: Date;
+}
+
+const DiaryItem = ({id, emotionId, content, createdDate}: DiaryItemProps) => {
 
   const nav = useNavigate()
 

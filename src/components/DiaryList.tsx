@@ -3,11 +3,12 @@ import Button from "./Button";
 import DiaryItem from "./DiaryItem";
 import "./DiaryList.css";
 import { useState } from "react";
+import { DiaryData } from "../App";
 
 const DiaryList = ({ data }) => {
   const [sortType, setSortType] = useState("latest");
 
-  const onChangeSortType = (e) => {
+  const onChangeSortType = (e:React.ChangeEvent<HTMLInputElement>) => {
     setSortType(e.target.value);
   };
 

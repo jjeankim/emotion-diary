@@ -6,9 +6,20 @@ import { useNavigate } from "react-router-dom";
 import { emotionList } from "../util/constants";
 import { getStringedDate } from "../util/getStringedDate";
 
-const Editor = ({ onSubmit, initData }) => {
+type InitData = {
+  createdDate: Date;
+  emotionId: number;
+  content: string;
+}
+
+interface EditorProps {
+  onSubmit: (input:InitData) => void;
+  initData: InitData;
+}
+
+const Editor = ({ onSubmit, initData }:EditorProps) => {
   const nav = useNavigate();
-  const [input, setInput] = useState({
+  const [input, setInput] = useState<InitData>({
     createdDate: new Date(),
     emotionId: 3,
     content: "",
@@ -23,17 +34,19 @@ const Editor = ({ onSubmit, initData }) => {
     }
   }, [initData]);
 
-  const onChangeInput = (e) => {
-    let name = e.target.name;
-    let value = e.target.value;
-
-    if (name === "createdDate") {
-      value = new Date(value);
-    }
-    setInput({
-      ...input,
-      [name]: value,
-    });
+  const onChangeInput = (e:React.ChangeEvent<HTMLInputElement>) => {
+   const {name, value} = e.target;
+    // if (name === "createdDate") {
+    //   value = new Date(value);
+    // }
+    // setInput({
+    //   ...input,
+    //   [name]: value,
+    // });
+    setInput(prev => ({
+      ...prev,
+      [name]: name === "createdDate" ? new Date(value): value  
+    }))
   };
 
   const onClickSubmitButton = () => {
