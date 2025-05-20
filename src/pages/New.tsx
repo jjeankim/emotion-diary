@@ -3,14 +3,14 @@ import Button from "../components/Button";
 import Editor from "../components/Editor";
 import Header from "../components/Header";
 import { useContext } from "react";
-import { DiaryDispatchContext } from "../App";
+import { DiaryData, DiaryDispatchContext } from "../App";
 
 const New = () => {
-  const { onCreate } = useContext(DiaryDispatchContext);
+  const { onCreate } = useContext(DiaryDispatchContext)!;
   const nav = useNavigate();
 
-  const onSubmit = (input) => {
-    onCreate(input.createdDate.getTime(), input.emotionId, input.content);
+  const onSubmit = (input:DiaryData) => {
+    onCreate(input.createdDate, input.emotionId, input.content);
     nav("/", { replace: true });
   };
 

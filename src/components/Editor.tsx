@@ -7,6 +7,7 @@ import { emotionList } from "../util/constants";
 import { getStringedDate } from "../util/getStringedDate";
 
 type InitData = {
+  id: number;
   createdDate: Date;
   emotionId: number;
   content: string;
@@ -14,12 +15,13 @@ type InitData = {
 
 interface EditorProps {
   onSubmit: (input:InitData) => void;
-  initData: InitData;
+  initData?: InitData;
 }
 
 const Editor = ({ onSubmit, initData }:EditorProps) => {
   const nav = useNavigate();
   const [input, setInput] = useState<InitData>({
+    id: 1,
     createdDate: new Date(),
     emotionId: 3,
     content: "",
@@ -34,19 +36,20 @@ const Editor = ({ onSubmit, initData }:EditorProps) => {
     }
   }, [initData]);
 
-  const onChangeInput = (e:React.ChangeEvent<HTMLInputElement>) => {
-   const {name, value} = e.target;
-    // if (name === "createdDate") {
-    //   value = new Date(value);
-    // }
-    // setInput({
-    //   ...input,
-    //   [name]: value,
-    // });
-    setInput(prev => ({
+  const onChangeInput = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+
+    setInput((prev) => ({
       ...prev,
-      [name]: name === "createdDate" ? new Date(value): value  
-    }))
+      [name]:
+        name === "createdDate"
+          ? new Date(value)
+          : name === "emotionId"
+          ? Number(value) // 👈 string을 number로 변환
+          : value,
+    }));
   };
 
   const onClickSubmitButton = () => {
@@ -72,9 +75,9 @@ const Editor = ({ onSubmit, initData }:EditorProps) => {
                 onChangeInput({
                   target: {
                     name: "emotionId",
-                    value: item.emotionId,
+                    value: String(item.emotionId),
                   },
-                });
+                } as React.ChangeEvent<HTMLInputElement>);
               }}
               key={item.emotionId}
               {...item}

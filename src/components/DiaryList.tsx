@@ -5,24 +5,31 @@ import "./DiaryList.css";
 import { useState } from "react";
 import { DiaryData } from "../App";
 
-const DiaryList = ({ data }) => {
+interface DiaryListProps {
+  data: DiaryData[]
+}
+
+const DiaryList = ({ data }: DiaryListProps) => {
   const [sortType, setSortType] = useState("latest");
 
-  const onChangeSortType = (e:React.ChangeEvent<HTMLInputElement>) => {
+  const onChangeSortType = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSortType(e.target.value);
   };
 
   const getSortedData = () => {
     return data.toSorted((a, b) => {
+      const timeA = new Date(a.createdDate).getTime();
+      const timeB = new Date(b.createdDate).getTime();
+
       if (sortType === "oldest") {
-        return Number(a.createdDate) - Number(b.createdDate);
+        return timeA - timeB;
       } else {
-        return b.createdDate - a.createdDate;
+        return timeB - timeA;
       }
     });
   };
 
-  const sortedData = getSortedData()
+  const sortedData = getSortedData();
   const nav = useNavigate();
 
   return (

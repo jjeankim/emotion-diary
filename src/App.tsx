@@ -13,7 +13,7 @@ export type DiaryData = {
   content: string;
 }
 
-type DiariDispatchContext = {
+export type DiaryDispatchContextType = {
   onCreate: (createdDate:Date, emotionId:number, content:string) => void;
   onUpdate: (id:number, createdDate:Date, emotionId:number, content:string) => void;
   onDelete: (id:number) => void;
@@ -41,7 +41,9 @@ function reducer(state:DiaryData[], action:DiaryAction) : DiaryData[]{
 }
 
 export const DiaryStateContext = createContext<DiaryData[] | undefined>(undefined);
-export const DiaryDispatchContext = createContext<DiariDispatchContext | undefined>(undefined);
+export const DiaryDispatchContext = createContext<
+  DiaryDispatchContextType | undefined
+>(undefined);
 
 const mockData = [
   {

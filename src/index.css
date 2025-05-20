@@ -4,10 +4,7 @@ html, body {
   margin: 0px;
   width: 100%;
   background-color: rgb(245,245,245);
-<<<<<<< HEAD
-=======
   display: flex;
->>>>>>> 3eeb5f8b8eb4d24a382f5aa88ef17581ada9e4e5
 }
 
 #root {
@@ -18,20 +15,14 @@ html, body {
   min-height: 100vh;
   height: 100%;
   box-shadow: rgba(100,100,100,0.2) 0px 0px 29px 0px;
-<<<<<<< HEAD
-=======
   padding: 0px 20px;
->>>>>>> 3eeb5f8b8eb4d24a382f5aa88ef17581ada9e4e5
 }
 
 
 body {
   font-family: "Nanum Pen Script";
-<<<<<<< HEAD
-=======
 }
 
 button,select,input,textarea {
   font-family: "Nanum Pen Script";;
->>>>>>> 3eeb5f8b8eb4d24a382f5aa88ef17581ada9e4e5
 }

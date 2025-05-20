@@ -3,28 +3,28 @@ import Button from "../components/Button";
 import Editor from "../components/Editor";
 import Header from "../components/Header";
 import { useContext } from "react";
-import { DiaryDispatchContext } from "../App";
+import { DiaryData, DiaryDispatchContext } from "../App";
 import useDiary from "../hooks/useDiary";
 
 const Edit = () => {
-  const { onDelete, onUpdate } = useContext(DiaryDispatchContext);
+  const { onDelete, onUpdate } = useContext(DiaryDispatchContext)!;
   const params = useParams();
   const nav = useNavigate();
 
-  const currentDiaryItem = useDiary(params.id)
+  const currentDiaryItem = useDiary(Number(params.id))
 
   const onClickDelete = () => {
     if (window.confirm("일기를 정말 삭제할까요? 다시 복구되지 않아요!")) {
-      onDelete(params.id);
+      onDelete(Number(params.id));
       nav("/", { replace: true });
     }
   };
 
-  const onSubmit = (input) => {
+  const onSubmit = (input:DiaryData) => {
     if (window.confirm("일기를 정말 수정할까요?")) {
       onUpdate(
-        params.id,
-        input.createdDate.getTime(),
+        Number(params.id),
+        input.createdDate,
         input.emotionId,
         input.content
       );
@@ -32,7 +32,7 @@ const Edit = () => {
     }
   };
 
-
+  if(!currentDiaryItem) return <div>데이터 로딩 중...!</div>
 
   return (
     <div>

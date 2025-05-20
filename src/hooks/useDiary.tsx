@@ -1,14 +1,14 @@
 import { useContext, useEffect, useState } from "react";
-import { DiaryStateContext } from "../App";
+import { DiaryData, DiaryStateContext } from "../App";
 import { useNavigate} from "react-router-dom";
 
 const useDiary = (id:number) => {
   
   const nav = useNavigate();
   const data = useContext(DiaryStateContext);
-  const [currentDiaryItem, setCurrentDiaryItem] = useState();
+  const [currentDiaryItem, setCurrentDiaryItem] = useState<DiaryData | undefined>();
   useEffect(() => {
-    const currentDiaryItem = data.find(
+    const currentDiaryItem = data?.find(
       (item) => String(item.id) === String(id)
     );
     if (!currentDiaryItem) {
@@ -16,7 +16,7 @@ const useDiary = (id:number) => {
       nav("/", { replace: true });
     }
     setCurrentDiaryItem(currentDiaryItem);
-  }, [id, data]);
+  }, [id, data,nav]);
 
   return currentDiaryItem;
 };
