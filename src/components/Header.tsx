@@ -1,4 +1,3 @@
-import { ReactNode } from "react";
 import "./Header.css";
 import { HeaderProps } from "../type/type";
 

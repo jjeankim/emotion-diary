@@ -5,14 +5,14 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { emotionList } from "../util/constants";
 import { getStringedDate } from "../util/getStringedDate";
-import { EditorProps, InitData } from "../type/type";
+import { DiaryItemProps, EditorProps } from "../type/type";
 
 
 const Editor = ({ onSubmit, initData }:EditorProps) => {
   const nav = useNavigate();
-  const [input, setInput] = useState<InitData>({
-    id: 1,
-    createdDate: new Date(),
+  const [input, setInput] = useState<DiaryItemProps>({
+    id: "",
+    createdAt: new Date(),
     emotionId: 3,
     content: "",
   });
@@ -21,7 +21,7 @@ const Editor = ({ onSubmit, initData }:EditorProps) => {
     if (initData) {
       setInput({
         ...initData,
-        createdDate: new Date(Number(initData.createdDate)),
+        createdAt: new Date(Number(initData.createdAt)),
       });
     }
   }, [initData]);
@@ -52,7 +52,7 @@ const Editor = ({ onSubmit, initData }:EditorProps) => {
         <h4>오늘의 날짜</h4>
         <input
           onChange={onChangeInput}
-          value={getStringedDate(input.createdDate)}
+          value={getStringedDate(input.createdAt)}
           type="date"
         />
       </section>

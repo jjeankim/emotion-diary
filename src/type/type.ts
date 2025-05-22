@@ -6,20 +6,20 @@ export interface ButtonProps {
   onClick: () => void;
 }
 
-export interface DiaryItem {
-  id?: string;
+export interface DiaryItemProps {
+  id: string;
   emotionId: number;
   content: string;
   createdAt: Date;
 }
 
 export interface DiaryListProps {
-  data: DiaryItem[]
+  data: DiaryItemProps[];
 }
 
 export interface EditorProps {
-  onSubmit: (input: DiaryItem) => void;
-  initData?: DiaryItem;
+  onSubmit: (input: DiaryItemProps) => void;
+  initData?: DiaryItemProps;
 }
 
 export interface EmotionItemPrpos {

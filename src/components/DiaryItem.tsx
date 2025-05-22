@@ -1,13 +1,11 @@
 import { useNavigate } from "react-router-dom";
-
 import Button from "./Button";
 import "./DiaryItem.css";
 import { getEmotionImage } from "../util/getEmotionImage";
 import { DiaryItemProps } from "../type/type";
 
-const DiaryItem = ({id, emotionId, content, createdDate}: DiaryItemProps) => {
-
-  const nav = useNavigate()
+const DiaryItem = ({ id, emotionId, content, createdAt }: DiaryItemProps) => {
+  const nav = useNavigate();
 
   return (
     <div className="DiaryItem">
@@ -19,12 +17,13 @@ const DiaryItem = ({id, emotionId, content, createdDate}: DiaryItemProps) => {
       </div>
       <div onClick={() => nav(`/diary/${id}`)} className="info_section">
         <div className="created_date">
-          {new Date(createdDate).toLocaleDateString()}
+          {new Date(createdAt).toLocaleDateString()}
         </div>
         <div className="content">{content}</div>
       </div>
       <div className="button_section">
-        <Button onClick={() => nav(`/edit/${id}`)}
+        <Button
+          onClick={() => nav(`/edit/${id}`)}
           text="수정하기
         "
         />

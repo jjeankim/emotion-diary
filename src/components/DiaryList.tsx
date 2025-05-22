@@ -14,8 +14,8 @@ const DiaryList = ({ data }: DiaryListProps) => {
 
   const getSortedData = () => {
     return data.toSorted((a, b) => {
-      const timeA = new Date(a.createdDate).getTime();
-      const timeB = new Date(b.createdDate).getTime();
+      const timeA = new Date(a.createdAt).getTime();
+      const timeB = new Date(b.createdAt).getTime();
 
       if (sortType === "oldest") {
         return timeA - timeB;
