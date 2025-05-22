@@ -4,9 +4,10 @@ import Diary from "./pages/Diary";
 import New from "./pages/New";
 import Notfound from "./pages/Notfound";
 import Edit from "./pages/Edit";
-import { createContext, useReducer } from "react";
+import { createContext, useEffect, useReducer } from "react";
 import { DiaryItemProps } from "./type/type";
-import { createDiary, deleteDiary, updateDiary } from "./api/diary";
+import { createDiary, deleteDiary, getDiary, updateDiary } from "./api/diary";
+import DiaryItem from "./components/DiaryItem";
 
 export type DiaryDispatchContextType = {
   onCreate: (content: string) => void;
@@ -25,6 +26,7 @@ interface DiaryUpdatedData {
 }
 
 type DiaryAction =
+| { type: "INIT"; data: DiaryItemProps[] }
   | { type: "CREATE"; data: DiaryItemProps }
   | { type: "UPDATE"; data: DiaryUpdatedData }
   | { type: "DELETE"; id: string };
@@ -34,6 +36,8 @@ function reducer(
   action: DiaryAction
 ): DiaryItemProps[] {
   switch (action.type) {
+    case "INIT": 
+    return action.data;
     case "CREATE":
       return [action.data, ...state];
     case "UPDATE":
@@ -101,6 +105,19 @@ function App() {
     });
   };
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const diaryList = await getDiary();
+        dispatch({ type: "INIT", data: diaryList });
+      } catch (error) {
+        console.error("일기 불러오기 실패:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+console.log(data)
   return (
     <>
       <DiaryStateContext.Provider value={data}>

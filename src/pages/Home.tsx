@@ -5,7 +5,7 @@ import { useContext, useState } from "react";
 import { DiaryStateContext } from "../App";
 import { DiaryItemProps } from "../type/type";
 
-const getMonthlyData = (pivotDate:Date, data:DiaryItemProps[]) => {
+const getMonthlyData = (pivotDate: Date, data: DiaryItemProps[]) => {
   const biginTime = new Date(
     pivotDate.getFullYear(),
     pivotDate.getMonth(),
@@ -13,7 +13,7 @@ const getMonthlyData = (pivotDate:Date, data:DiaryItemProps[]) => {
     0,
     0,
     0
-  ).getTime();
+  );
   const endTime = new Date(
     pivotDate.getFullYear(),
     pivotDate.getMonth() + 1,
@@ -21,10 +21,11 @@ const getMonthlyData = (pivotDate:Date, data:DiaryItemProps[]) => {
     23,
     59,
     59
-  ).getTime();
-  return data.filter(
-    (item) => biginTime <= item.createdAt.getTime() && item.createdAt.getTime() <= endTime
   );
+  return data.filter((item) => {
+    const createdAt = new Date(item.createdAt);
+    return biginTime <= createdAt && createdAt <= endTime;
+  });
 };
 
 const Home = () => {
