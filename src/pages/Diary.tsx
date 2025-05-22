@@ -9,13 +9,13 @@ const Diary = () => {
   const params = useParams();
   const nav = useNavigate();
 
-  const currentDiaryItem = useDiary(Number(params.id));
+  const currentDiaryItem = useDiary(params.id);
   if (!currentDiaryItem) {
     return <div>데이터 로딩중...!</div>;
   }
 
-  const { createdDate, emotionId, content } = currentDiaryItem;
-  const title = getStringedDate(new Date(createdDate));
+  const { createdAt, emotionId, content } = currentDiaryItem;
+  const title = getStringedDate(new Date(createdAt));
   return (
     <div>
       <Header

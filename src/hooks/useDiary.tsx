@@ -1,14 +1,17 @@
 import { useContext, useEffect, useState } from "react";
 import { DiaryStateContext } from "../App";
-import { useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { DiaryItemProps } from "../type/type";
 
-const useDiary = (id:string) => {
-  
+const useDiary = (id?: string) => {
   const nav = useNavigate();
   const data = useContext(DiaryStateContext);
-  const [currentDiaryItem, setCurrentDiaryItem] = useState<DiaryItemProps | undefined>();
+  const [currentDiaryItem, setCurrentDiaryItem] = useState<
+    DiaryItemProps | undefined
+  >();
   useEffect(() => {
+    if (!data) return;
+
     const currentDiaryItem = data?.find(
       (item) => String(item.id) === String(id)
     );
@@ -17,9 +20,9 @@ const useDiary = (id:string) => {
       nav("/", { replace: true });
     }
     setCurrentDiaryItem(currentDiaryItem);
-  }, [id, data,nav]);
+  }, [id, data, nav]);
 
   return currentDiaryItem;
 };
 
-export default useDiary
+export default useDiary;
