@@ -2,7 +2,8 @@ import Header from "../components/Header";
 import Button from "../components/Button";
 import DiaryList from "../components/DiaryList";
 import { useContext, useState } from "react";
-import { DiaryData, DiaryStateContext } from "../App";
+import { DiaryStateContext } from "../App";
+import { DiaryData } from "../type/type";
 
 const getMonthlyData = (pivotDate:Date, data:DiaryData[]) => {
   const biginTime = new Date(
@@ -22,7 +23,7 @@ const getMonthlyData = (pivotDate:Date, data:DiaryData[]) => {
     59
   ).getTime();
   return data.filter(
-    (item) => biginTime <= item.createdDate.getTime() && item.createdDate.getTime() <= endTime
+    (item) => biginTime <= item.createdAt.getTime() && item.createdAt.getTime() <= endTime
   );
 };
 

@@ -7,6 +7,8 @@ import Edit from "./pages/Edit";
 import { createContext, useReducer, useRef } from "react";
 import { DiaryData } from "./type/type";
 
+const BASE_URL = process.env.REACT_APP_API_URL || "http://localhost:3000"
+
 export type DiaryDispatchContextType = {
   onCreate: (createdDate: Date, emotionId: number, content: string) => void;
   onUpdate: (
@@ -48,33 +50,33 @@ export const DiaryDispatchContext = createContext<
 const mockData = [
   {
     id: 1,
-    createdDate: new Date("2025-02-19").getTime(),
+    createdAt: new Date("2025-02-19"),
     emotionId: 1,
     content: "1번 일기 내용",
   },
   {
     id: 2,
-    createdDate: new Date("2025-02-18").getTime(),
+    createdAt: new Date("2025-02-18"),
     emotionId: 2,
     content: "2번 일기 내용",
   },
   {
     id: 3,
-    createdDate: new Date("2025-01-20").getTime(),
+    createdAt: new Date("2025-01-20"),
     emotionId: 3,
     content: "3번 일기 내용",
   },
 ];
 
 function App() {
-  const [data, dispatch] = useReducer(reducer, []);
+  const [data, dispatch] = useReducer(reducer, mockData);
   const idRef = useRef(3);
 
-  const onCreate = (createdDate: Date, emotionId: number, content: string) => {
+  const onCreate = (createdAt: Date, emotionId: number, content: string) => {
     dispatch({
       type: "CREATE",
       data: {
-        createdDate,
+        createdAt,
         emotionId,
         content,
         id: idRef.current++,
@@ -84,7 +86,7 @@ function App() {
 
   const onUpdate = (
     id: number,
-    createdDate: Date,
+    createdAt: Date,
     emotionId: number,
     content: string
   ) => {
@@ -92,7 +94,7 @@ function App() {
       type: "UPDATE",
       data: {
         id,
-        createdDate,
+        createdAt,
         emotionId,
         content,
       },

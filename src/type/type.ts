@@ -10,7 +10,7 @@ export interface DiaryItemProps {
   id: number;
   emotionId: number;
   content: string;
-  createdDate: Date;
+  createdAt: Date;
 }
 
 export interface DiaryListProps {
@@ -19,7 +19,7 @@ export interface DiaryListProps {
 
 export type InitData = {
   id: number;
-  createdDate: Date;
+  createdAt: Date;
   emotionId: number;
   content: string;
 }
@@ -49,7 +49,7 @@ export interface ViewerProps {
 
 export type DiaryData = {
   id: number;
-  createdDate: Date;
+  createdAt: Date;
   emotionId: number;
   content: string;
 }

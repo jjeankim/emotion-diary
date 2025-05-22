@@ -3,7 +3,8 @@ import Button from "../components/Button";
 import Editor from "../components/Editor";
 import Header from "../components/Header";
 import { useContext } from "react";
-import { DiaryData, DiaryDispatchContext } from "../App";
+import { DiaryDispatchContext } from "../App";
+import { DiaryData } from "../type/type";
 
 const New = () => {
   const { onCreate } = useContext(DiaryDispatchContext)!;
