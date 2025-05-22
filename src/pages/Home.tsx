@@ -3,9 +3,9 @@ import Button from "../components/Button";
 import DiaryList from "../components/DiaryList";
 import { useContext, useState } from "react";
 import { DiaryStateContext } from "../App";
-import { DiaryData } from "../type/type";
+import { DiaryItemProps } from "../type/type";
 
-const getMonthlyData = (pivotDate:Date, data:DiaryData[]) => {
+const getMonthlyData = (pivotDate:Date, data:DiaryItemProps[]) => {
   const biginTime = new Date(
     pivotDate.getFullYear(),
     pivotDate.getMonth(),

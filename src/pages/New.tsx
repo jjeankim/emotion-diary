@@ -4,14 +4,14 @@ import Editor from "../components/Editor";
 import Header from "../components/Header";
 import { useContext } from "react";
 import { DiaryDispatchContext } from "../App";
-import { DiaryData } from "../type/type";
+import { DiaryItemProps } from "../type/type";
 
 const New = () => {
   const { onCreate } = useContext(DiaryDispatchContext)!;
   const nav = useNavigate();
 
-  const onSubmit = (input:DiaryData) => {
-    onCreate(input.createdDate, input.emotionId, input.content);
+  const onSubmit = (input:DiaryItemProps) => {
+    onCreate(input.createdAt, input.emotionId, input.content);
     nav("/", { replace: true });
   };
 
