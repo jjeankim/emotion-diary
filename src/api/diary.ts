@@ -8,11 +8,11 @@ export const getDiary = async ():Promise<DiaryItem[]> => {
   return await res.json();
 };
 
-export const createDiary = async (data: DiaryItem):Promise<DiaryItem> => {
+export const createDiary = async (content:string):Promise<DiaryItem> => {
   const res = await fetch(`${BASE_URL}/diary`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(data),
+    body: JSON.stringify({content}),
   });
 
   if (!res.ok) throw new Error("Fetch failed");
