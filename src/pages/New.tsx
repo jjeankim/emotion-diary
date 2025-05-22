@@ -11,7 +11,7 @@ const New = () => {
   const nav = useNavigate();
 
   const onSubmit = (input:DiaryItemProps) => {
-    onCreate(input.createdAt, input.emotionId, input.content);
+    onCreate(input.content);
     nav("/", { replace: true });
   };
 

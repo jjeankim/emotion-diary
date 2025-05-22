@@ -1,107 +1,100 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import Home from "./pages/Home";
 import Diary from "./pages/Diary";
 import New from "./pages/New";
 import Notfound from "./pages/Notfound";
 import Edit from "./pages/Edit";
-import { createContext, useReducer, useRef } from "react";
-import { DiaryData } from "./type/type";
-
-const BASE_URL = process.env.REACT_APP_API_URL || "http://localhost:3000"
+import { createContext, useReducer } from "react";
+import { DiaryItemProps } from "./type/type";
+import { createDiary, deleteDiary, updateDiary } from "./api/diary";
 
 export type DiaryDispatchContextType = {
-  onCreate: (createdDate: Date, emotionId: number, content: string) => void;
+  onCreate: (content: string) => void;
   onUpdate: (
-    id: number,
-    createdDate: Date,
+    id: string,
     emotionId: number,
     content: string
   ) => void;
-  onDelete: (id: number) => void;
+  onDelete: (id: string) => void;
 };
 
-type DiaryAction =
-  | { type: "CREATE"; data: DiaryData }
-  | { type: "UPDATE"; data: DiaryData }
-  | { type: "DELETE"; id: number };
+interface DiaryUpdatedData {
+  id: string;
+  emotionId:number;
+  content:string;
+}
 
-function reducer(state: DiaryData[], action: DiaryAction): DiaryData[] {
+type DiaryAction =
+  | { type: "CREATE"; data: DiaryItemProps }
+  | { type: "UPDATE"; data: DiaryUpdatedData }
+  | { type: "DELETE"; id: string };
+
+function reducer(
+  state: DiaryItemProps[],
+  action: DiaryAction
+): DiaryItemProps[] {
   switch (action.type) {
     case "CREATE":
       return [action.data, ...state];
     case "UPDATE":
       return state.map((item) =>
-        String(item.id) === String(action.data.id) ? action.data : item
+        item.id === action.data.id ?{...item, ...action.data} : item
       );
     case "DELETE":
-      return state.filter((item) => String(item.id) !== String(action.id));
+      return state.filter((item) => item.id !== action.id);
     default:
       return state;
   }
 }
 
-export const DiaryStateContext = createContext<DiaryData[] | undefined>(
+export const DiaryStateContext = createContext<DiaryItemProps[] | undefined>(
   undefined
 );
 export const DiaryDispatchContext = createContext<
   DiaryDispatchContextType | undefined
 >(undefined);
 
-const mockData = [
-  {
-    id: 1,
-    createdAt: new Date("2025-02-19"),
-    emotionId: 1,
-    content: "1번 일기 내용",
-  },
-  {
-    id: 2,
-    createdAt: new Date("2025-02-18"),
-    emotionId: 2,
-    content: "2번 일기 내용",
-  },
-  {
-    id: 3,
-    createdAt: new Date("2025-01-20"),
-    emotionId: 3,
-    content: "3번 일기 내용",
-  },
-];
-
 function App() {
-  const [data, dispatch] = useReducer(reducer, mockData);
-  const idRef = useRef(3);
+  const [data, dispatch] = useReducer(reducer, []);
+  const nav = useNavigate()
 
-  const onCreate = (createdAt: Date, emotionId: number, content: string) => {
-    dispatch({
-      type: "CREATE",
-      data: {
-        createdAt,
-        emotionId,
-        content,
-        id: idRef.current++,
-      },
-    });
+  const onCreate = async (content: string) => {
+    try {
+      const newDiary = await createDiary(content);
+      dispatch({
+        type: "CREATE",
+        data: newDiary,
+      });
+    } catch (error) {
+      console.error("일기 생성 실패:", error);
+      window.alert("일기 생성에 실패했습니다. 다시 시도해주세요.");
+    }
   };
 
-  const onUpdate = (
-    id: number,
-    createdAt: Date,
+  const onUpdate = async (
+    id:string,
     emotionId: number,
     content: string
   ) => {
-    dispatch({
-      type: "UPDATE",
-      data: {
-        id,
-        createdAt,
-        emotionId,
-        content,
-      },
-    });
+    try {
+      await updateDiary(id, emotionId, content)
+      dispatch({
+        type: "UPDATE",
+        data:{
+          id,
+          emotionId,
+          content,
+        }
+      })
+      nav(`/diary/${id}`)
+    } catch (error) {
+      console.error('일기 수정 실패:', error)
+      window.alert("일기 수정에 실패했습니다.")
+    }
   };
 
-  const onDelete = (id: number) => {
+  const onDelete = async (id: string) => {
+    await deleteDiary(id)
     dispatch({
       type: "DELETE",
       id,
