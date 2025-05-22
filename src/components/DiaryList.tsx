@@ -3,11 +3,7 @@ import Button from "./Button";
 import DiaryItem from "./DiaryItem";
 import "./DiaryList.css";
 import { useState } from "react";
-import { DiaryData } from "../App";
-
-interface DiaryListProps {
-  data: DiaryData[]
-}
+import { DiaryListProps } from "../type/type";
 
 const DiaryList = ({ data }: DiaryListProps) => {
   const [sortType, setSortType] = useState("latest");

@@ -3,13 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Button from "./Button";
 import "./DiaryItem.css";
 import { getEmotionImage } from "../util/getEmotionImage";
-
-interface DiaryItemProps {
-  id: number;
-  emotionId: number;
-  content: string;
-  createdDate: Date;
-}
+import { DiaryItemProps } from "../type/type";
 
 const DiaryItem = ({id, emotionId, content, createdDate}: DiaryItemProps) => {
 

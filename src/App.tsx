@@ -5,27 +5,25 @@ import New from "./pages/New";
 import Notfound from "./pages/Notfound";
 import Edit from "./pages/Edit";
 import { createContext, useReducer, useRef } from "react";
-
-export type DiaryData = {
-  id: number;
-  createdDate: Date;
-  emotionId: number;
-  content: string;
-}
+import { DiaryData } from "./type/type";
 
 export type DiaryDispatchContextType = {
-  onCreate: (createdDate:Date, emotionId:number, content:string) => void;
-  onUpdate: (id:number, createdDate:Date, emotionId:number, content:string) => void;
-  onDelete: (id:number) => void;
-}
+  onCreate: (createdDate: Date, emotionId: number, content: string) => void;
+  onUpdate: (
+    id: number,
+    createdDate: Date,
+    emotionId: number,
+    content: string
+  ) => void;
+  onDelete: (id: number) => void;
+};
 
-type DiaryAction = 
-  | {type: "CREATE"; data: DiaryData}
-  | {type: "UPDATE"; data: DiaryData}
-  | {type: "DELETE"; id : number}
-  
+type DiaryAction =
+  | { type: "CREATE"; data: DiaryData }
+  | { type: "UPDATE"; data: DiaryData }
+  | { type: "DELETE"; id: number };
 
-function reducer(state:DiaryData[], action:DiaryAction) : DiaryData[]{
+function reducer(state: DiaryData[], action: DiaryAction): DiaryData[] {
   switch (action.type) {
     case "CREATE":
       return [action.data, ...state];
@@ -40,7 +38,9 @@ function reducer(state:DiaryData[], action:DiaryAction) : DiaryData[]{
   }
 }
 
-export const DiaryStateContext = createContext<DiaryData[] | undefined>(undefined);
+export const DiaryStateContext = createContext<DiaryData[] | undefined>(
+  undefined
+);
 export const DiaryDispatchContext = createContext<
   DiaryDispatchContextType | undefined
 >(undefined);
@@ -70,7 +70,7 @@ function App() {
   const [data, dispatch] = useReducer(reducer, []);
   const idRef = useRef(3);
 
-  const onCreate = (createdDate:Date, emotionId:number, content:string) => {
+  const onCreate = (createdDate: Date, emotionId: number, content: string) => {
     dispatch({
       type: "CREATE",
       data: {
@@ -82,7 +82,12 @@ function App() {
     });
   };
 
-  const onUpdate = (id:number, createdDate:Date, emotionId:number, content:string) => {
+  const onUpdate = (
+    id: number,
+    createdDate: Date,
+    emotionId: number,
+    content: string
+  ) => {
     dispatch({
       type: "UPDATE",
       data: {
@@ -94,7 +99,7 @@ function App() {
     });
   };
 
-  const onDelete = (id:number) => {
+  const onDelete = (id: number) => {
     dispatch({
       type: "DELETE",
       id,

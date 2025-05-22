@@ -1,13 +1,9 @@
+import { ViewerProps } from "../type/type";
 import { emotionList } from "../util/constants";
 import { getEmotionImage } from "../util/getEmotionImage";
 import "./Viewer.css";
 
-interface ViewerProps {
-  emotionId: number;
-  content: string;
-}
-
-const Viewer = ({ emotionId, content }:ViewerProps) => {
+const Viewer = ({ emotionId, content }: ViewerProps) => {
   const emotionItem = emotionList.find(
     (item) => String(item.emotionId) === String(emotionId)
   );

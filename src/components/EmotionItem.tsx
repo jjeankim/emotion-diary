@@ -1,15 +1,13 @@
-
+import { EmotionItemPrpos } from "../type/type";
 import { getEmotionImage } from "../util/getEmotionImage";
 import "./EmotionItem.css";
 
-interface EmotionItemPrpos {
-  emotionId: number;
-  emotionName: string;
-  isSelected: boolean;
-  onClick: () => void;
-}
-
-const EmotionItem = ({ emotionId, emotionName, isSelected, onClick }:EmotionItemPrpos) => {
+const EmotionItem = ({
+  emotionId,
+  emotionName,
+  isSelected,
+  onClick,
+}: EmotionItemPrpos) => {
   return (
     <div
       onClick={onClick}

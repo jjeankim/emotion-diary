@@ -5,18 +5,8 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { emotionList } from "../util/constants";
 import { getStringedDate } from "../util/getStringedDate";
+import { EditorProps, InitData } from "../type/type";
 
-type InitData = {
-  id: number;
-  createdDate: Date;
-  emotionId: number;
-  content: string;
-}
-
-interface EditorProps {
-  onSubmit: (input:InitData) => void;
-  initData?: InitData;
-}
 
 const Editor = ({ onSubmit, initData }:EditorProps) => {
   const nav = useNavigate();
