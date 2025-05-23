@@ -12,11 +12,11 @@ const Edit = () => {
   const params = useParams();
   const nav = useNavigate();
 
-  const currentDiaryItem = useDiary(params.id)
+  const currentDiaryItem = useDiary(params.id as string)
 
   const onClickDelete = () => {
     if (window.confirm("일기를 정말 삭제할까요? 다시 복구되지 않아요!")) {
-      onDelete(Number(params.id));
+      onDelete(params.id as string);
       nav("/", { replace: true });
     }
   };
@@ -24,8 +24,7 @@ const Edit = () => {
   const onSubmit = (input:DiaryItemProps) => {
     if (window.confirm("일기를 정말 수정할까요?")) {
       onUpdate(
-        Number(params.id),
-        input.createdAt,
+        params.id as string,
         input.emotionId,
         input.content
       );
