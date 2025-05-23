@@ -21,6 +21,7 @@
   min-height: 200px;
   resize: vertical;
   box-sizing: border-box;
+  resize: none;
 }
 
 .Editor > section > textarea:focus {

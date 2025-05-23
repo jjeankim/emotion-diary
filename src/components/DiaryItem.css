@@ -52,6 +52,12 @@
 
 .DiaryItem .info_section .content {
   font-size: 18px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; 
+  -webkit-box-orient: vertical;
+  word-break: break-word;
+  max-height: 3.2rem;
 }
 
 .DiaryItem .button_section {
