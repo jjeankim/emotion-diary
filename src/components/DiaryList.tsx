@@ -13,6 +13,7 @@ const DiaryList = ({ data }: DiaryListProps) => {
   };
 
   const getSortedData = () => {
+
     return data.toSorted((a, b) => {
       const timeA = new Date(a.createdAt).getTime();
       const timeB = new Date(b.createdAt).getTime();
@@ -43,7 +44,7 @@ const DiaryList = ({ data }: DiaryListProps) => {
       </div>
       <div className="list_wrapper">
         {sortedData.map((item) => (
-          <DiaryItem key={item.id} {...item} />
+          <DiaryItem key={item._id} {...item} />
         ))}
       </div>
     </div>

@@ -23,6 +23,12 @@
   box-sizing: border-box;
 }
 
+.Editor > section > textarea:focus {
+  outline: none;
+  border: 2px solid rgb(100,201,100);
+}
+
+
 .Editor .emotion_section .emotion_list_wrapper {
   display: flex;
   justify-content: space-around;

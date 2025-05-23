@@ -9,30 +9,28 @@ import { DiaryItemProps } from "../type/type";
 
 const Edit = () => {
   const { onDelete, onUpdate } = useContext(DiaryDispatchContext)!;
-  const params = useParams();
+  const { id } = useParams();
   const nav = useNavigate();
 
-  const currentDiaryItem = useDiary(params.id as string)
+  const currentDiaryItem = useDiary(id);
+
+  if (!id) return <div>잘못된 접근입니다.</div>;
 
   const onClickDelete = () => {
     if (window.confirm("일기를 정말 삭제할까요? 다시 복구되지 않아요!")) {
-      onDelete(params.id as string);
+      onDelete(id);
       nav("/", { replace: true });
     }
   };
 
-  const onSubmit = (input:DiaryItemProps) => {
+  const onSubmit = (input: DiaryItemProps) => {
     if (window.confirm("일기를 정말 수정할까요?")) {
-      onUpdate(
-        params.id as string,
-        input.emotionId,
-        input.content
-      );
+      onUpdate(id, input.emotionId, input.content);
       nav("/", { replace: true });
     }
   };
 
-  if(!currentDiaryItem) return <div>데이터 로딩 중...!</div>
+  if (!currentDiaryItem) return <div>데이터 로딩 중...!</div>;
 
   return (
     <div>

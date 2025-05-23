@@ -4,18 +4,18 @@ import "./DiaryItem.css";
 import { getEmotionImage } from "../util/getEmotionImage";
 import { DiaryItemProps } from "../type/type";
 
-const DiaryItem = ({ id, emotionId, content, createdAt }: DiaryItemProps) => {
+const DiaryItem = ({ _id, emotionId, content, createdAt }: DiaryItemProps) => {
   const nav = useNavigate();
 
   return (
     <div className="DiaryItem">
       <div
-        onClick={() => nav(`/diary/${id}`)}
+        onClick={() => nav(`/diary/${_id}`)}
         className={`img_section img_section_${emotionId}`}
       >
         <img src={getEmotionImage(emotionId)} alt="" />
       </div>
-      <div onClick={() => nav(`/diary/${id}`)} className="info_section">
+      <div onClick={() => nav(`/diary/${_id}`)} className="info_section">
         <div className="created_date">
           {new Date(createdAt).toLocaleDateString()}
         </div>
@@ -23,7 +23,7 @@ const DiaryItem = ({ id, emotionId, content, createdAt }: DiaryItemProps) => {
       </div>
       <div className="button_section">
         <Button
-          onClick={() => nav(`/edit/${id}`)}
+          onClick={() => nav(`/edit/${_id}`)}
           text="수정하기
         "
         />

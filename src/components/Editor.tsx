@@ -7,11 +7,10 @@ import { emotionList } from "../util/constants";
 import { getStringedDate } from "../util/getStringedDate";
 import { DiaryItemProps, EditorProps } from "../type/type";
 
-
-const Editor = ({ onSubmit, initData }:EditorProps) => {
+const Editor = ({ onSubmit, initData }: EditorProps) => {
   const nav = useNavigate();
   const [input, setInput] = useState<DiaryItemProps>({
-    id: "",
+    _id: "",
     createdAt: new Date(),
     emotionId: 3,
     content: "",
@@ -21,7 +20,7 @@ const Editor = ({ onSubmit, initData }:EditorProps) => {
     if (initData) {
       setInput({
         ...initData,
-        createdAt: new Date(Number(initData.createdAt)),
+        createdAt: new Date(initData.createdAt),
       });
     }
   }, [initData]);
@@ -37,7 +36,7 @@ const Editor = ({ onSubmit, initData }:EditorProps) => {
         name === "createdDate"
           ? new Date(value)
           : name === "emotionId"
-          ? Number(value) // 👈 string을 number로 변환
+          ? Number(value)
           : value,
     }));
   };
