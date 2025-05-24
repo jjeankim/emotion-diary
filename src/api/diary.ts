@@ -1,6 +1,6 @@
 import { DiaryItemProps } from "../type/type";
 
-const BASE_URL = "https://emotion-diary-api.onrender.com";
+const BASE_URL = process.env.REACT_APP_API_URL ;
 
 export const getDiary = async (): Promise<DiaryItemProps[]> => {
   const res = await fetch(`${BASE_URL}/diary`);
