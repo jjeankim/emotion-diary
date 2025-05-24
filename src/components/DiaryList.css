@@ -13,6 +13,11 @@
   cursor: pointer;
 }
 
+.DiaryList .menu_bar select:focus {
+  outline: none;
+  border: 2px solid rgb(100,201,100);
+}
+
 .DiaryList .menu_bar button {
   flex: 1;
 }
