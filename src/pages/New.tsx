@@ -2,16 +2,15 @@ import { useNavigate } from "react-router-dom";
 import Button from "../components/Button";
 import Editor from "../components/Editor";
 import Header from "../components/Header";
-import { useContext } from "react";
-import { DiaryDispatchContext } from "../App";
 import { DiaryItemProps } from "../type/type";
+import useDiaryStore from "../store/diaryStore";
 
 const New = () => {
-  const { onCreate } = useContext(DiaryDispatchContext)!;
+  const { onCreate } = useDiaryStore()
   const nav = useNavigate();
 
-  const onSubmit = (input:DiaryItemProps) => {
-    onCreate(input.content);
+  const onSubmit = async (input:DiaryItemProps) => {
+    await onCreate(input.content);
     nav("/", { replace: true });
   };
 

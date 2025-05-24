@@ -1,9 +1,9 @@
 import Header from "../components/Header";
 import Button from "../components/Button";
 import DiaryList from "../components/DiaryList";
-import { useContext, useState } from "react";
-import { DiaryStateContext } from "../App";
+import { useEffect, useState } from "react";
 import { DiaryItemProps } from "../type/type";
+import useDiaryStore from "../store/diaryStore";
 
 const getMonthlyData = (pivotDate: Date, data: DiaryItemProps[]) => {
   const biginTime = new Date(
@@ -29,9 +29,12 @@ const getMonthlyData = (pivotDate: Date, data: DiaryItemProps[]) => {
 };
 
 const Home = () => {
-  const data = useContext(DiaryStateContext);
-
+  const { data, fetchData } = useDiaryStore();
   const [pivotDate, setPivotDate] = useState(new Date());
+
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
 
   const monthlyData = getMonthlyData(pivotDate, data ?? []);
 

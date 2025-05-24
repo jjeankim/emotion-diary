@@ -2,13 +2,12 @@ import { useNavigate, useParams } from "react-router-dom";
 import Button from "../components/Button";
 import Editor from "../components/Editor";
 import Header from "../components/Header";
-import { useContext } from "react";
-import { DiaryDispatchContext } from "../App";
 import useDiary from "../hooks/useDiary";
 import { DiaryItemProps } from "../type/type";
+import useDiaryStore from "../store/diaryStore";
 
 const Edit = () => {
-  const { onDelete, onUpdate } = useContext(DiaryDispatchContext)!;
+  const { onDelete, onUpdate } = useDiaryStore()
   const { id } = useParams();
   const nav = useNavigate();
 
@@ -16,16 +15,16 @@ const Edit = () => {
 
   if (!id) return <div>잘못된 접근입니다.</div>;
 
-  const onClickDelete = () => {
+  const onClickDelete = async () => {
     if (window.confirm("일기를 정말 삭제할까요? 다시 복구되지 않아요!")) {
-      onDelete(id);
+      await onDelete(id);
       nav("/", { replace: true });
     }
   };
 
-  const onSubmit = (input: DiaryItemProps) => {
+  const onSubmit = async (input: DiaryItemProps) => {
     if (window.confirm("일기를 정말 수정할까요?")) {
-      onUpdate(id, input.emotionId, input.content);
+      await onUpdate(id, input.emotionId, input.content);
       nav("/", { replace: true });
     }
   };
