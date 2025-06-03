@@ -9,7 +9,7 @@ export const getDiary = async (): Promise<DiaryItemProps[]> => {
 };
 
 export const createDiary = async (content: string): Promise<DiaryItemProps> => {
-  const res = await fetch(`${BASE_URL}/diary`, {
+  const res = await fetch(`${BASE_URL}/diaries`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ content }),
@@ -25,7 +25,7 @@ export const updateDiary = async (
   emotionId: number,
   content: string
 ): Promise<DiaryItemProps> => {
-  const res = await fetch(`${BASE_URL}/diary/${id}`, {
+  const res = await fetch(`${BASE_URL}/diaries/${id}`, {
     method: "PATCH",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ emotionId, content }),
@@ -35,7 +35,7 @@ export const updateDiary = async (
 };
 
 export const deleteDiary = async (id: string): Promise<boolean> => {
-  const res = await fetch(`${BASE_URL}/diary/${id}`, {
+  const res = await fetch(`${BASE_URL}/diaries/${id}`, {
     method: "DELETE",
   });
   if (!res.ok) throw new Error("Delete failed");
