@@ -5,7 +5,7 @@ import { createDiary, deleteDiary, getDiary, updateDiary } from "../api/diary";
 interface DiaryStore {
   data: DiaryItemProps[];
   fetchData: () => Promise<void>;
-  onCreate: (content: string) => Promise<void>;
+  onCreate: (input: DiaryItemProps) => Promise<void>;
   onUpdate: (id: string, emotionId: number, content: string) => Promise<void>;
   onDelete: (id: string) => Promise<void>;
 }
@@ -21,9 +21,9 @@ const useDiaryStore = create<DiaryStore>((set, get) => ({
     }
   },
 
-  onCreate: async (content) => {
+  onCreate: async (input) => {
     try {
-      const newDiary = await createDiary(content);
+      const newDiary = await createDiary(input);
       set((state) => ({ data: [newDiary, ...state.data] }));
     } catch (err) {
       console.error("일기 생성 실패:", err);

@@ -9,8 +9,8 @@ const New = () => {
   const { onCreate } = useDiaryStore()
   const nav = useNavigate();
 
-  const onSubmit = async (input:DiaryItemProps) => {
-    await onCreate(input.content);
+  const onSubmit = async (input: DiaryItemProps) => {
+    await onCreate(input);
     nav("/", { replace: true });
   };
 

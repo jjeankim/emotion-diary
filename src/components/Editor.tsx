@@ -10,7 +10,6 @@ import { DiaryItemProps, EditorProps } from "../type/type";
 const Editor = ({ onSubmit, initData }: EditorProps) => {
   const nav = useNavigate();
   const [input, setInput] = useState<DiaryItemProps>({
-    _id: "",
     createdAt: new Date(),
     emotionId: 3,
     content: "",
@@ -50,6 +49,7 @@ const Editor = ({ onSubmit, initData }: EditorProps) => {
       <section className="date_section">
         <h4>오늘의 날짜</h4>
         <input
+          name="createdAt"
           onChange={onChangeInput}
           value={getStringedDate(input.createdAt)}
           type="date"

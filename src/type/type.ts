@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 
 //App.ts Type
 export interface DiaryItemProps {
-  _id: string;
+  _id?: string;
   emotionId: number;
   content: string;
   createdAt: Date;
