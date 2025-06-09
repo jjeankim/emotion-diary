@@ -33,3 +33,31 @@ input,
 textarea {
   font-family: "Pretendard";
 }
+
+/* 반응형 디자인을 위한 미디어 쿼리 */
+@media screen and (max-width: 768px) {
+  #root {
+    padding: 0px 15px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  #root {
+    padding: 0px 10px;
+  }
+  
+  body {
+    font-size: 14px;
+  }
+}
+
+/* 모바일 기기에서 터치 영역 최적화 */
+@media (hover: none) and (pointer: coarse) {
+  button,
+  select,
+  input[type="button"],
+  input[type="submit"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}

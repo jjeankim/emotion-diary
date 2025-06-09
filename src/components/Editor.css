@@ -40,3 +40,58 @@
   display: flex;
   justify-content: space-between;
 }
+
+/* 반응형 디자인 */
+@media screen and (max-width: 768px) {
+  .Editor > section {
+    margin-bottom: 30px;
+  }
+
+  .Editor > section > h4 {
+    font-size: 20px;
+  }
+
+  .Editor > section > input, textarea {
+    font-size: 18px;
+    padding: 8px 16px;
+  }
+
+  .Editor > section > textarea {
+    min-height: 180px;
+    padding: 16px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .Editor > section {
+    margin-bottom: 20px;
+  }
+
+  .Editor > section > h4 {
+    font-size: 18px;
+  }
+
+  .Editor > section > input, textarea {
+    font-size: 16px;
+    padding: 6px 12px;
+  }
+
+  .Editor > section > textarea {
+    min-height: 150px;
+    padding: 12px;
+  }
+
+  .Editor .emotion_section .emotion_list_wrapper {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .Editor .button_section {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .Editor .button_section button {
+    width: 100%;
+  }
+}

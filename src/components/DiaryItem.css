@@ -63,3 +63,51 @@
 .DiaryItem .button_section {
   min-width: 70px;
 }
+
+/* 반응형 디자인 */
+@media screen and (max-width: 768px) {
+  .DiaryItem {
+    gap: 10px;
+  }
+
+  .DiaryItem .img_section {
+    min-width: 100px;
+    height: 70px;
+  }
+
+  .DiaryItem .info_section .created_date {
+    font-size: 20px;
+  }
+
+  .DiaryItem .info_section .content {
+    font-size: 16px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .DiaryItem {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .DiaryItem .img_section {
+    width: 100%;
+    min-width: unset;
+    height: 60px;
+  }
+
+  .DiaryItem .info_section .created_date {
+    font-size: 18px;
+  }
+
+  .DiaryItem .info_section .content {
+    font-size: 14px;
+  }
+
+  .DiaryItem .button_section {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+  }
+}
